@@ -1,3 +1,4 @@
+# WINDOWS ONLY
 # Function to check and enable UPnP service
 function Enable-UPnP {
     # Set the most basic values needed for this script
@@ -78,11 +79,11 @@ function Remove-PortMapping {
 }
 
 # Define the port, protocol, and description, edit accordingly. (note, the firewall must be allowing inbound and outbound traffic for the port)
-$externalPort = 25565 # any port used for programs, eg: 80 for HTTP or 443 for HTTPS
-$internalPort = 25565 # same as above
-$internalClient = (Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object { $_.IPAddress -ne $null }).IPAddress[0]
+$externalPort = 000 # any port used for programs, eg: 80 for HTTP or 443 for HTTPS, 25565 for Minecraft
+$internalPort = 000 # same as above
+$internalClient = (Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object { $_.IPAddress -ne $null }).IPAddress[0] # Leave this line alone
 $protocol = "TCP"  # or "UDP" (note, the firewall must be set on the pc to allow this protocol)
-$description = "Minecraft Server" # Any program name can go here if you need
+$description = "Example Server" # Any program name can go here if you need
 
 # Enable UPnP services
 Enable-UPnP
@@ -93,7 +94,7 @@ while ($true) {
     Add-PortMapping -externalPort $externalPort -internalPort $internalPort -internalClient $internalClient -protocol $protocol -description $description
 
     # Sleep for 1 hour
-    Start-Sleep -Seconds 3600
+    Start-Sleep -Seconds 3600 # Adjust time accordingly, default is 1 hour (3600 seconds)
 
     # Remove the port mapping before re-adding it
     Remove-PortMapping -Port $externalPort -Protocol $protocol
