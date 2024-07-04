@@ -1,4 +1,7 @@
 # WINDOWS ONLY
+
+Write-Host "Please make sure you have edited this file and put your required port and description"
+
 # Function to check and enable UPnP service
 function Enable-UPnP {
     # Set the most basic values needed for this script
@@ -99,6 +102,8 @@ while ($true) {
     # Remove the port mapping before re-adding it
     Remove-PortMapping -Port $externalPort -Protocol $protocol
 }
+
+# END SCRIPT BELOW
 
 # Wait for user input to close the port after use, remove these lines below to loop until the script is closed forcibly
 Write-Output "Press Enter to close the port..."
